@@ -1,0 +1,14 @@
+/cache
+/com
+/easysite.properties
+/errors.properties
+/log4j.properties
+/mappings
+/mybatis-config.xml
+/mybatis-refresh.properties
+/spring-context-jedis.xml
+/spring-context-shiro.xml
+/spring-context.xml
+/spring-mvc.xml
+/stencilset.json
+/templates

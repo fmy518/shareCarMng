@@ -1,0 +1,46 @@
+/*
+ * 拓扑图相关样式
+ * @author wang_chengsheng 
+ */
+
+body{
+	margin:0px;
+	padding:0px;
+}
+#main{
+	margin:0px;
+	padding:0px;
+}
+.absolute_layer{
+	border-color: #00FF00;
+	background-color:rgba(255,255,255, 0.9); 
+	position: absolute;
+	bottom:0;
+}
+.smallview{
+	width:161px;
+	height:121px;
+	border:1px;
+	right:0;
+}
+.timeView{
+	width:210px;
+	height:19px;
+	left:0;
+	bottom:3;
+	font-size:10px;
+	color:#000;
+	margin-left:10px;
+	background-color:rgba(255,255,255, 0); 
+}
+.scaling{
+	width:210px;
+	height:19px;
+	left:0;
+	top:30px;
+	font-size:10px;
+	color:#000;
+	margin-left:10px;
+	background-color:rgba(255,255,255, 0); 
+	z-index:9999;
+}

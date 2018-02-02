@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.hoperun.easysite.modules.offlinedev.dao.OfflineTableFieldDao">
+
+	<sql id="offlineTableFieldColumns">
+		a.id AS "id",
+		a.field_name AS "fieldName",
+		a.table_name AS
+		"tableName",
+		a.field_comment AS "fieldComment",
+		a.type AS "type",
+		a.length AS "length",
+		a.is_key AS "isKey",
+		a.is_null AS "isNull",
+		a.order_num AS "orderNum",
+		a.create_by AS "createBy.id",
+		a.create_date
+		AS "createDate",
+		a.main_field AS "mainField",
+		a.main_table AS
+		"mainTable",
+		a.update_by AS "updateBy.id",
+		a.update_date AS
+		"updateDate",
+		a.notes AS "notes"
+	</sql>
+
+	<sql id="offlineTableFieldJoins">
+	</sql>
+
+	<select id="get" resultType="OfflineTableField">
+		SELECT
+		<include refid="offlineTableFieldColumns" />
+		FROM offline_table_field a
+		<include refid="offlineTableFieldJoins" />
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="findList" resultType="OfflineTableField">
+		SELECT
+		<include refid="offlineTableFieldColumns" />
+		FROM offline_table_field a
+		<include refid="offlineTableFieldJoins" />
+		WHERE a.del_flag = '0'
+		<if test="tableName != null and tableName != ''">
+			AND a.table_name like
+			<if test="dbName == 'oracle'">'%'||#{tableName}||'%'</if>
+			<if test="dbName == 'mssql'">'%'+#{tableName}+'%'</if>
+			<if test="dbName == 'mysql'">concat('%',#{tableName},'%')</if>
+		</if>
+		ORDER BY a.id DESC
+	</select>
+
+	<select id="findAllList" resultType="OfflineTableField">
+		SELECT
+		<include refid="offlineTableFieldColumns" />
+		FROM offline_table_field a
+		<include refid="offlineTableFieldJoins" />
+		<where>
+
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+
+	<insert id="insert">
+		INSERT INTO offline_table_field(
+		id,
+		field_name,
+		table_name,
+		field_comment,
+		type,
+		length,
+		is_key,
+		is_null,
+		order_num,
+		create_by,
+		create_date,
+		main_field,
+		main_table,
+		update_by,
+		update_date,
+		del_flag,
+		notes
+		) VALUES (
+		#{id},
+		#{fieldName},
+		#{tableName},
+		#{fieldComment},
+		#{type},
+		#{length},
+		#{isKey},
+		#{isNull},
+		#{orderNum},
+		#{createBy.id},
+		#{createDate},
+		#{mainField},
+		#{mainTable},
+		#{updateBy.id},
+		#{updateDate},
+		'0',
+		#{notes}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE offline_table_field SET
+		field_name = #{fieldName},
+		table_name = #{tableName},
+		field_comment = #{fieldComment},
+		type = #{type},
+		length = #{length},
+		is_key = #{isKey},
+		is_null = #{isNull},
+		order_num = #{orderNum},
+		main_field = #{mainField},
+		main_table = #{mainTable},
+		update_by = #{updateBy.id},
+		update_date = #{updateDate},
+		notes = #{notes}
+		WHERE id = #{id}
+	</update>
+
+	<update id="delete">
+		DELETE FROM offline_table_field
+		WHERE id = #{id}
+	</update>
+	<select id="findFieldList" resultType="OfflineTableField">
+		SELECT
+		<include refid="offlineTableFieldColumns" />
+		FROM offline_table_field a
+		WHERE a.table_name = #{tableName}
+	</select>
+</mapper>

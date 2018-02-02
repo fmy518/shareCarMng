@@ -1,0 +1,27 @@
+
+body {
+  font: 13px/20px 'Lucida Grande', Tahoma, Verdana, sans-serif;
+  color: #404040;
+ 
+}
+
+.container {
+  margin: 1px;
+  text-align: center;
+}
+
+
+.label {
+  display: inline-block;
+  width:1px;
+  height:10px;
+  border:1px;
+  border-style:solid;
+  margin: 1px;
+  padding-top: 2px ;
+  padding-left: 3px;
+  color: #aaa;
+  text-shadow: 0 1px black;
+  border-radius: 0px;
+  cursor: pointer;
+}
